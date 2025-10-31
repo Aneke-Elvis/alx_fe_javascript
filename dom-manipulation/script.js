@@ -90,7 +90,7 @@ function filterQuotes() {
 // ---- Simulated Server Sync ----
 const SERVER_URL = "https://jsonplaceholder.typicode.com/posts"; // mock endpoint
 
-async function fetchServerQuotes() {
+async function fetchQuotesFromServer() {
   try {
     const res = await fetch(SERVER_URL);
     const data = await res.json();
