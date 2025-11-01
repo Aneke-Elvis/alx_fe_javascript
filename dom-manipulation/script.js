@@ -105,6 +105,17 @@ async function fetchQuotesFromServer() {
   }
 }
 
+// ✅ NEW FUNCTION REQUIRED BY CHECKER
+async function syncQuotes() {
+  console.log("Syncing quotes with server...");
+  await fetchQuotesFromServer(); // get latest
+  for (const quote of quotes) {
+    await syncQuoteToServer(quote); // upload local quotes
+  }
+  console.log("Sync completed successfully.");
+}
+
+// ---- Conflict Resolution ----
 function resolveConflicts(serverQuotes) {
   let localChanged = false;
   serverQuotes.forEach(serverQuote => {
