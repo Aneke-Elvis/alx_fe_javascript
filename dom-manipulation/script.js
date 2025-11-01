@@ -92,17 +92,16 @@ const SERVER_URL = "https://jsonplaceholder.typicode.com/posts"; // mock endpoin
 
 async function fetchQuotesFromServer() {
   try {
-    const res = await fetch(SERVER_URL);
-    const data = await res.json();
-    // Simulate server quotes (just using titles)
-    const serverQuotes = data.slice(0, 5).map(item => ({
-      id: item.id,
-      text: item.title,
-      category: "Server"
-    }));
-    resolveConflicts(serverQuotes);
+    await fetch(SERVER_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(quote)
+    });
+    console.log("Quote synced to server:", quote.text);
   } catch (err) {
-    console.error("Server fetch failed:", err);
+    console.error("Error syncing quote:", err);
   }
 }
 
